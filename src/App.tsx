@@ -6,7 +6,7 @@ export default function App() {
   const [showAddContainerModal, setShowAddContainerModal] = useState(false);
 
   return (
-    <div className="mx-auto max-w-7xl py-10">
+    <div className="mx-auto max-w-7xl">
       <Modal
         showModal={showAddContainerModal}
         setShowModal={setShowAddContainerModal}
