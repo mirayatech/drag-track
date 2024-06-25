@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Input, Modal } from "./components";
 
 export default function App() {
-  const [itemName, setItemName] = useState("");
+  const [containerName, setContainerName] = useState("");
   const [showAddContainerModal, setShowAddContainerModal] = useState(false);
 
   return (
@@ -17,14 +17,15 @@ export default function App() {
           </h1>
           <Input
             type="text"
-            placeholder="Item Title"
-            name="itemname"
-            value={itemName}
-            onChange={(e) => setItemName(e.target.value)}
+            placeholder="Container Title"
+            name="containername"
+            value={containerName}
+            onChange={(e) => setContainerName(e.target.value)}
           />
-          <Button fullWidth onClick={() => {}} label="Add Item" />
+          <Button fullWidth={true} label="Add container" onClick={() => {}} />
         </div>
       </Modal>
+
       <div className="flex items-center justify-between gap-y-2">
         <h1 className="text-gray-800 text-3xl font-bold">DragTrack</h1>
         <Button
