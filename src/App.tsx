@@ -3,6 +3,7 @@ import { Button, Container, Input, Items, Modal } from "./components";
 import { useContainerStore } from "./lib";
 import {
   DndContext,
+  DragMoveEvent,
   DragOverlay,
   DragStartEvent,
   KeyboardSensor,
@@ -14,6 +15,7 @@ import {
 } from "@dnd-kit/core";
 import {
   SortableContext,
+  arrayMove,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 
@@ -95,6 +97,101 @@ export default function App() {
     setActiveId(id);
   }
 
+  const handleDragMove = (event: DragMoveEvent) => {
+    const { active, over } = event;
+
+    // Handle Items Sorting
+    if (
+      active.id.toString().includes("item") &&
+      over?.id.toString().includes("item") &&
+      active &&
+      over &&
+      active.id !== over.id
+    ) {
+      const activeContainer = findValueOfItems(active.id, "item");
+      const overContainer = findValueOfItems(over.id, "item");
+
+      if (!activeContainer || !overContainer) return;
+
+      // Find the index of the active and over container
+      const activeContainerIndex = containers.findIndex(
+        (container) => container.id === activeContainer.id
+      );
+
+      const overContainerIndex = containers.findIndex(
+        (container) => container.id === overContainer.id
+      );
+
+      // Find the index of the active and over item
+      const activeitemIndex = activeContainer.items.findIndex(
+        (item) => item.id === active.id
+      );
+      const overitemIndex = overContainer.items.findIndex(
+        (item) => item.id === over.id
+      );
+      // In the same container
+      if (activeContainerIndex === overContainerIndex) {
+        const newItems = [...containers];
+        newItems[activeContainerIndex].items = arrayMove(
+          newItems[activeContainerIndex].items,
+          activeitemIndex,
+          overitemIndex
+        );
+
+        setContainers(newItems);
+      } else {
+        // In different containers
+        const newItems = [...containers];
+        const [removeditem] = newItems[activeContainerIndex].items.splice(
+          activeitemIndex,
+          1
+        );
+        newItems[overContainerIndex].items.splice(
+          overitemIndex,
+          0,
+          removeditem
+        );
+        setContainers(newItems);
+      }
+    }
+
+    // Handling Item Drop Into a Container
+    if (
+      active.id.toString().includes("item") &&
+      over?.id.toString().includes("container") &&
+      active &&
+      over &&
+      active.id !== over.id
+    ) {
+      const activeContainer = findValueOfItems(active.id, "item");
+      const overContainer = findValueOfItems(over.id, "container");
+
+      if (!activeContainer || !overContainer) return;
+
+      // Find the index of the active and over container
+      const activeContainerIndex = containers.findIndex(
+        (container) => container.id === activeContainer.id
+      );
+      const overContainerIndex = containers.findIndex(
+        (container) => container.id === overContainer.id
+      );
+
+      // Find the index of the active and over item
+      const activeitemIndex = activeContainer.items.findIndex(
+        (item) => item.id === active.id
+      );
+
+      // Remove the active item from the active container and add it to the over container
+      const newItems = [...containers];
+      const [removeditem] = newItems[activeContainerIndex].items.splice(
+        activeitemIndex,
+        1
+      );
+      newItems[overContainerIndex].items.push(removeditem);
+      setContainers(newItems);
+    }
+  };
+
   return (
     <div className="mx-auto max-w-7xl">
       {/* 📦 Container Modal */}
@@ -131,7 +228,7 @@ export default function App() {
             placeholder="Item Title"
             name="itemname"
             value={itemName}
-            onChange={(e) => setItemName(e.target.value)}
+            onChange={(event) => setItemName(event.target.value)}
           />
           <Button fullWidth={true} label="Add Item" onClick={onAddItem} />
         </div>
@@ -150,7 +247,7 @@ export default function App() {
             sensors={sensors}
             collisionDetection={closestCorners}
             onDragStart={handleDragStart}
-            onDragMove={() => {}}
+            onDragMove={handleDragMove}
             onDragEnd={() => {}}
           >
             <SortableContext items={containers.map((item) => item.id)}>
