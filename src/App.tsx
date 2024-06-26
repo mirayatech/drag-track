@@ -261,7 +261,15 @@ export default function App() {
                     setCurrentContainerId(container.id);
                   }}
                 >
-                  children
+                  <SortableContext
+                    items={container.items.map((item) => item.id)}
+                  >
+                    <div className="flex items-start flex-col gap-y-4">
+                      {container.items.map((item) => (
+                        <Items title={item.title} id={item.id} key={item.id} />
+                      ))}
+                    </div>
+                  </SortableContext>
                 </Container>
               ))}
             </SortableContext>
