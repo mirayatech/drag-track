@@ -4,6 +4,7 @@ import { DNDType } from "..";
 
 type ContainerState = {
   containers: DNDType[];
+  setContainers: (containers: DNDType[]) => void;
   addContainer: (title: string) => void;
 };
 
@@ -11,6 +12,7 @@ export const useContainerStore = create<ContainerState>()(
   persist(
     (set) => ({
       containers: [],
+      setContainers: (containers) => set({ containers }),
       addContainer: (title: string) =>
         set((state) => ({
           containers: [
