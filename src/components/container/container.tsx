@@ -13,11 +13,12 @@ type ContainerProps = {
   description?: string;
   onAddItem?: () => void;
 };
+
 export function Container({ id, children, title, onAddItem }: ContainerProps) {
   const {
     attributes,
     setNodeRef,
-    // listeners,
+    listeners,
     transform,
     transition,
     isDragging,
@@ -27,6 +28,7 @@ export function Container({ id, children, title, onAddItem }: ContainerProps) {
       type: "container",
     },
   });
+
   return (
     <div
       {...attributes}
@@ -41,9 +43,9 @@ export function Container({ id, children, title, onAddItem }: ContainerProps) {
       )}
     >
       <div>
-        <div className="flex items-center bg-white rounded-md-b justify-between rounded-t-lg border-b border-gray-300 p-4">
+        <div className="flex items-center bg-white justify-between rounded-t-lg border-b border-gray-300 p-4">
           <h1 className="text-gray-800 text-base font-medium">{title}</h1>
-          <button className="hover:shadow-xl">
+          <button className="hover:shadow-xl" {...listeners}>
             <GripVertical size={16} className="text-gray-400 cursor-grab" />
           </button>
         </div>
@@ -51,10 +53,9 @@ export function Container({ id, children, title, onAddItem }: ContainerProps) {
       <div className="flex flex-col gap-y-4 p-4">{children}</div>
       <div className="p-4">
         <Button
-          // variant="ghost"
+          variant="ghost"
           onClick={onAddItem}
-          transparent={true}
-          label=" Add Item"
+          label="Add Item"
           fullWidth={true}
         />
       </div>
