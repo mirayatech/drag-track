@@ -1,26 +1,17 @@
 import { useState } from "react";
 import { Button, Container, Input, Modal } from "./components";
-import { DNDType } from "./lib";
+import { useContainerStore } from "./lib";
 
 export default function App() {
   const [containerName, setContainerName] = useState("");
-  const [containers, setContainers] = useState<DNDType[]>([]);
   const [showAddContainerModal, setShowAddContainerModal] = useState(false);
+  const { containers, addContainer } = useContainerStore();
 
   const onAddContainer = () => {
     if (!containerName) return;
-    const id = `container-${Math.random() * 1000}`;
-    setContainers([
-      ...containers,
-      {
-        id,
-        title: containerName,
-        items: [],
-      },
-    ]);
+    addContainer(containerName);
     setContainerName("");
     setShowAddContainerModal(false);
-    console.log(containers);
   };
 
   return (
