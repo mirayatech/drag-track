@@ -43,15 +43,18 @@ export function Container({ id, children, title, onAddItem }: ContainerProps) {
       )}
     >
       <div>
-        <div className="flex items-center bg-white justify-between rounded-t-lg border-b border-gray-300 p-4">
+        <div className="flex items-center bg-white justify-between rounded-t-lg border-b border-gray-300 p-4 pr-2">
           <h1 className="text-gray-800 text-base font-medium">{title}</h1>
-          <button className="hover:shadow-xl" {...listeners}>
-            <GripVertical size={16} className="text-gray-400 cursor-grab" />
+          <button
+            className="hover:bg-gray-100 p-2 rounded-md transition-colors cursor-grab"
+            {...listeners}
+          >
+            <GripVertical size={16} className="text-gray-400" />
           </button>
         </div>
       </div>
-      <div className="flex flex-col gap-y-4 p-4">{children}</div>
-      <div className="p-4">
+      <div className="flex flex-col gap-y-4 p-3">{children}</div>
+      <div className="p-4 mt-auto">
         <Button
           variant="ghost"
           onClick={onAddItem}
