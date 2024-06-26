@@ -13,14 +13,26 @@ type ContainerProps = {
   description?: string;
   onAddItem?: () => void;
 };
-export function Container({ id, children, title }: ContainerProps) {
-  const { attributes, setNodeRef, transform, transition, isDragging } =
-    useSortable({
-      id: id,
-      data: {
-        type: "container",
-      },
-    });
+export function Container({
+  id,
+  children,
+  title,
+}: // description,
+// onAddItem,
+ContainerProps) {
+  const {
+    attributes,
+    setNodeRef,
+    // listeners,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: id,
+    data: {
+      type: "container",
+    },
+  });
   return (
     <div
       {...attributes}
@@ -45,6 +57,7 @@ export function Container({ id, children, title }: ContainerProps) {
       <div className="flex flex-col gap-y-4 p-4">{children}</div>
       <div className="p-4">
         <Button
+          // variant="ghost"
           onClick={() => {}}
           transparent={true}
           label=" Add Item"
