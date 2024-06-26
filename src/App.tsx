@@ -19,20 +19,35 @@ import {
 
 export default function App() {
   const [containerName, setContainerName] = useState("");
-  const { containers, addContainer } = useContainerStore();
+  const { containers, setContainers, addContainer } = useContainerStore();
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [showAddContainerModal, setShowAddContainerModal] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [showAddItemModal, setShowAddItemModal] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentContainerId, setCurrentContainerId] =
     useState<UniqueIdentifier>();
+  const [itemName, setItemName] = useState("");
+
+  useState<UniqueIdentifier>();
 
   const onAddContainer = () => {
     if (!containerName) return;
     addContainer(containerName);
     setContainerName("");
     setShowAddContainerModal(false);
+  };
+
+  const onAddItem = () => {
+    if (!itemName) return;
+    const id = `item-${Math.random() * 1000}`;
+    const container = containers.find((item) => item.id === currentContainerId);
+    if (!container) return;
+    container.items.push({
+      id,
+      title: itemName,
+    });
+    setContainers([...containers]);
+    setItemName("");
+    setShowAddItemModal(false);
   };
 
   function findValueOfItems(id: UniqueIdentifier | undefined, type: string) {
@@ -82,6 +97,7 @@ export default function App() {
 
   return (
     <div className="mx-auto max-w-7xl">
+      {/* 📦 Container Modal */}
       <Modal
         showModal={showAddContainerModal}
         setShowModal={setShowAddContainerModal}
@@ -104,7 +120,22 @@ export default function App() {
           />
         </div>
       </Modal>
-
+      {/* 📂 Item Modal */}
+      <Modal showModal={showAddItemModal} setShowModal={setShowAddItemModal}>
+        <div className="flex flex-col w-full items-start gap-y-4">
+          <h1 className="text-gray-800 text-2xl font-bold text-center mx-auto">
+            Add Item
+          </h1>
+          <Input
+            type="text"
+            placeholder="Item Title"
+            name="itemname"
+            value={itemName}
+            onChange={(e) => setItemName(e.target.value)}
+          />
+          <Button fullWidth={true} label="Add Item" onClick={onAddItem} />
+        </div>
+      </Modal>
       <div className="flex items-center justify-between gap-y-2">
         <h1 className="text-gray-800 text-3xl font-bold">DragTrack</h1>
         <Button
