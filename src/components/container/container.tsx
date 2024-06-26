@@ -13,13 +13,7 @@ type ContainerProps = {
   description?: string;
   onAddItem?: () => void;
 };
-export function Container({
-  id,
-  children,
-  title,
-}: // description,
-// onAddItem,
-ContainerProps) {
+export function Container({ id, children, title, onAddItem }: ContainerProps) {
   const {
     attributes,
     setNodeRef,
@@ -58,7 +52,7 @@ ContainerProps) {
       <div className="p-4">
         <Button
           // variant="ghost"
-          onClick={() => {}}
+          onClick={onAddItem}
           transparent={true}
           label=" Add Item"
           fullWidth={true}

@@ -1,5 +1,5 @@
 type ButtonProps = {
-  onClick: () => void;
+  onClick?: (() => void) | undefined;
   label: string;
   fullWidth?: boolean;
   transparent?: boolean;
