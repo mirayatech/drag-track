@@ -380,7 +380,7 @@ export default function App() {
                   <SortableContext
                     items={container.items.map((item) => item.id)}
                   >
-                    <div className="flex items-start flex-col gap-y-4">
+                    <div className="flex items-start flex-col gap-y-2">
                       {container.items.map((item) => (
                         <Items title={item.title} id={item.id} key={item.id} />
                       ))}

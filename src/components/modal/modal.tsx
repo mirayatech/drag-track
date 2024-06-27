@@ -46,7 +46,6 @@ export default function Modal({
             <motion.div
               ref={desktopModalRef}
               key="desktop-modal"
-              className="fixed inset-0 z-40 hidden min-h-screen items-center justify-center md:flex"
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
@@ -55,6 +54,7 @@ export default function Modal({
                   setShowModal(false);
                 }
               }}
+              className="fixed inset-0 z-40 hidden min-h-screen items-center justify-center md:flex"
             >
               <div
                 className={clsx(
