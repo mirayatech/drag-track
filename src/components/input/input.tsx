@@ -6,7 +6,6 @@ type InputProps = {
   value?: string;
   shadow?: boolean;
   placeholder?: string;
-  rounded?: "rounded-md" | "rounded-lg";
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -16,7 +15,6 @@ export function Input({
   value = "",
   placeholder = "",
   onChange = () => {},
-  rounded = "rounded-md",
   shadow = false,
 }: InputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,7 +33,9 @@ export function Input({
       value={value}
       placeholder={placeholder}
       onChange={onChange}
-      className={`border p-2 w-full ${rounded} ${shadow ? "shadow" : ""}`}
+      className={`border p-2 w-full rounded md:rounded-md outline-none ${
+        shadow ? "shadow" : ""
+      } text-xs  md:text-sm `}
     />
   );
 }

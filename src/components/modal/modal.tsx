@@ -48,11 +48,11 @@ export default function Modal({
                   setShowModal(false);
                 }
               }}
-              className="fixed inset-0 z-40 hidden min-h-screen items-center justify-center md:flex"
+              className="fixed inset-0 z-40 min-h-screen items-center justify-center flex"
             >
               <div
                 className={clsx(
-                  `overflow relative w-full max-w-lg transform rounded-lg border border-gray-200 bg-white p-6 text-left shadow-xl transition-all`,
+                  `mx-3 overflow relative w-full max-w-lg transform rounded-lg border border-gray-300 bg-white p-6 text-left shadow-xl transition-all`,
                   containerClasses
                 )}
               >

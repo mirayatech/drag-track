@@ -375,7 +375,7 @@ export default function App() {
         setShowModal={setShowAddContainerModal}
       >
         <div className="flex flex-col w-full items-start gap-y-4">
-          <h1 className="text-gray-800 text-2xl font-bold text-center mx-auto">
+          <h1 className="text-gray-800 text-xl md:text-2xl font-bold text-center mx-auto">
             Add Container
           </h1>
           <Input
@@ -395,7 +395,7 @@ export default function App() {
       {/* 📂 Item Modal */}
       <Modal showModal={showAddItemModal} setShowModal={setShowAddItemModal}>
         <div className="flex flex-col w-full items-start gap-y-4">
-          <h1 className="text-gray-800 text-2xl font-bold text-center mx-auto">
+          <h1 className="text-gray-800 text-xl md:text-2xl font-bold text-center mx-auto">
             Add Item
           </h1>
           <Input
@@ -414,7 +414,7 @@ export default function App() {
         setShowModal={setShowEditContainerModal}
       >
         <div className="flex flex-col w-full items-start gap-y-4">
-          <h1 className="text-gray-800 text-2xl font-bold text-center mx-auto">
+          <h1 className="text-gray-800 text-xl md:text-2xl font-bold text-center mx-auto">
             Edit Container
           </h1>
           <Input
@@ -434,7 +434,7 @@ export default function App() {
       {/* 📂 Edit Item Modal */}
       <Modal showModal={showEditItemModal} setShowModal={setShowEditItemModal}>
         <div className="flex flex-col w-full items-start gap-y-4">
-          <h1 className="text-gray-800 text-2xl font-bold text-center mx-auto">
+          <h1 className="text-gray-800 text-xl md:text-2xl font-bold text-center mx-auto">
             Edit Item
           </h1>
           <Input
@@ -458,7 +458,9 @@ export default function App() {
       </Modal>
       {/* header */}
       <div className="flex items-center justify-between gap-y-2">
-        <h1 className="text-gray-800 text-3xl font-bold">DragTrack</h1>
+        <h1 className="text-gray-800 text-xl md:text-3xl font-bold">
+          DragTrack
+        </h1>
         <Button
           onClick={() => setShowAddContainerModal(true)}
           label="Add Container"
@@ -466,7 +468,7 @@ export default function App() {
       </div>
       {/* 📦 Containers */}
       <div className="mt-10">
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <DndContext
             sensors={sensors}
             collisionDetection={closestCorners}
