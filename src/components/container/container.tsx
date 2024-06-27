@@ -16,15 +16,21 @@ type ContainerProps = {
   onDelete?: () => void;
 };
 
-export function Container({ id, children, title, onAddItem }: ContainerProps) {
+export function Container({
+  id,
+  children,
+  title,
+  onAddItem,
+  onEdit,
+  onDelete,
+}: ContainerProps) {
+  const [isMenuOpen, setMenuOpen] = useState(false);
   const { attributes, setNodeRef } = useSortable({
     id: id,
     data: {
       type: "container",
     },
   });
-
-  const [isMenuOpen, setMenuOpen] = useState(false);
 
   return (
     <div
@@ -44,7 +50,12 @@ export function Container({ id, children, title, onAddItem }: ContainerProps) {
             </button>
             <AnimatePresence>
               {isMenuOpen && (
-                <Menu setMenuOpen={setMenuOpen} isMenuOpen={isMenuOpen} />
+                <Menu
+                  setMenuOpen={setMenuOpen}
+                  isMenuOpen={isMenuOpen}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                />
               )}
             </AnimatePresence>
           </div>

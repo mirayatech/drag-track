@@ -1,19 +1,14 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import FocusTrap from "focus-trap-react";
 import clsx from "clsx";
+import React from "react";
 
 interface ModalProps {
   showModal: boolean;
   containerClasses?: string;
   children: React.ReactNode;
-  setShowModal: Dispatch<SetStateAction<boolean>>;
+  setShowModal: (value: boolean) => void;
 }
 
 export default function Modal({

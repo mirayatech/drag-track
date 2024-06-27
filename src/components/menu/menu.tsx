@@ -4,9 +4,16 @@ import { AnimatePresence, motion } from "framer-motion";
 type MenuProps = {
   isMenuOpen: boolean;
   setMenuOpen: (value: boolean) => void;
+  onEdit?: () => void;
+  onDelete?: () => void;
 };
 
-export default function Menu({ setMenuOpen, isMenuOpen }: MenuProps) {
+export default function Menu({
+  setMenuOpen,
+  isMenuOpen,
+  onEdit,
+  onDelete,
+}: MenuProps) {
   const desktopModalRef = useRef<HTMLDivElement>(null);
 
   const onKeyDown = useCallback(
@@ -55,6 +62,7 @@ export default function Menu({ setMenuOpen, isMenuOpen }: MenuProps) {
             className="block border-b w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50"
             onClick={() => {
               setMenuOpen(false);
+              if (onEdit) onEdit();
             }}
           >
             Edit
@@ -63,6 +71,7 @@ export default function Menu({ setMenuOpen, isMenuOpen }: MenuProps) {
             className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-50"
             onClick={() => {
               setMenuOpen(false);
+              if (onDelete) onDelete();
             }}
           >
             Delete
