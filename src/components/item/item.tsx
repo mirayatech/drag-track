@@ -1,15 +1,22 @@
 import { UniqueIdentifier } from "@dnd-kit/core";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Grip } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import clsx from "clsx";
+import { useState } from "react";
+import Menu from "../menu/menu";
+import { AnimatePresence } from "framer-motion";
 
 type ItemsType = {
   id: UniqueIdentifier;
   title: string;
+  onEdit?: () => void;
+  onDelete?: () => void;
 };
 
-export function Items({ id, title }: ItemsType) {
+export function Items({ id, title, onEdit, onDelete }: ItemsType) {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
   const {
     attributes,
     listeners,
@@ -23,6 +30,7 @@ export function Items({ id, title }: ItemsType) {
       type: "item",
     },
   });
+
   return (
     <div
       ref={setNodeRef}
@@ -32,19 +40,33 @@ export function Items({ id, title }: ItemsType) {
         transform: CSS.Translate.toString(transform),
       }}
       className={clsx(
-        "p-4 pr-3 bg-white shadow rounded-md w-full border  border-200 hover:border-gray-200",
+        "bg-white shadow rounded-md w-full border  border-200 hover:border-gray-200 flex pr-2 relative",
         isDragging && "opacity-50"
       )}
     >
-      <div className="flex items-center justify-between">
+      <div
+        className="flex flex-1 items-center justify-between p-4 pr-3"
+        {...listeners}
+      >
         {title}
-        <button
-          className="hover:bg-gray-100 p-2 rounded-md transition-colors cursor-grab"
-          {...listeners}
-        >
-          <Grip size={16} className="text-gray-400" />
-        </button>
       </div>
+      <button
+        className="text-gray-600 hover:text-gray-900 transition-colors"
+        onClick={() => setMenuOpen(!isMenuOpen)}
+      >
+        <EllipsisVertical size={17} />
+      </button>
+      <AnimatePresence>
+        {isMenuOpen && (
+          <Menu
+            extraTop={true}
+            setMenuOpen={setMenuOpen}
+            isMenuOpen={isMenuOpen}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

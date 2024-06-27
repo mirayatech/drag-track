@@ -2,7 +2,7 @@ type ButtonProps = {
   onClick?: (() => void) | undefined;
   label: string;
   fullWidth?: boolean;
-  transparent?: boolean;
+  bgLight?: boolean;
   variant?:
     | "default"
     | "destructive"
@@ -17,13 +17,14 @@ export function Button({
   label,
   fullWidth = false,
   variant = "default",
+  bgLight = false,
 }: ButtonProps) {
   const buttonVariants = {
     default: "bg-gray-900 text-white hover:bg-gray-800",
     destructive: "bg-red-600 text-white hover:bg-red-700",
     outline: "border border-gray-300 bg-white hover:bg-gray-100",
     secondary: "bg-gray-700 text-white hover:bg-gray-800",
-    ghost: "bg-transparent text-gray-600 hover:bg-gray-200 hover:text-gray-800",
+    ghost: "bg-transparent text-gray-600 hover:bg-gray-100 hover:text-gray-800",
     link: "text-blue-600 underline hover:text-blue-800",
   };
 
@@ -32,11 +33,11 @@ export function Button({
       onClick={onClick}
       className={`${
         fullWidth
-          ? "w-full flex items-center justify-center"
+          ? "w-full flex items-center justify-center text-center"
           : "flex items-center justify-center"
-      } rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
+      } gap-3 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
         buttonVariants[variant]
-      } h-10 px-4 py-2`}
+      } h-10 px-4 py-2 ${bgLight ? "bg-gray-100 hover:bg-gray-200" : ""}`}
     >
       {label}
     </button>

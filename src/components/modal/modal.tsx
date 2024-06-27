@@ -18,7 +18,6 @@ export default function Modal({
   containerClasses,
 }: ModalProps) {
   const desktopModalRef = useRef(null);
-
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") {

@@ -34,6 +34,10 @@ export default function App() {
     useState<UniqueIdentifier | null>(null);
   const [editingContainerName, setEditingContainerName] = useState("");
 
+  const [showEditItemModal, setShowEditItemModal] = useState(false);
+  const [editingItem, setEditingItem] = useState<UniqueIdentifier | null>(null);
+  const [editingItemName, setEditingItemName] = useState("");
+
   const onAddContainer = () => {
     if (!containerName) return;
     addContainer(containerName);
@@ -70,10 +74,42 @@ export default function App() {
     setShowEditContainerModal(false);
   };
 
+  const onDeleteItem = () => {
+    if (!editingItem) return;
+    const container = containers.find((container) =>
+      container.items.find((item) => item.id === editingItem)
+    );
+    if (!container) return;
+    container.items = container.items.filter((item) => item.id !== editingItem);
+    setContainers([...containers]);
+    setEditingItem(null);
+    setShowEditItemModal(false);
+  };
+
+  const onEditItem = () => {
+    if (!editingItemName || !editingItem) return;
+    const container = containers.find((container) =>
+      container.items.find((item) => item.id === editingItem)
+    );
+    if (!container) return;
+    const item = container.items.find((item) => item.id === editingItem);
+    if (!item) return;
+    item.title = editingItemName;
+    setContainers([...containers]);
+    setEditingItem(null);
+    setShowEditItemModal(false);
+  };
+
   const openEditModal = (id: UniqueIdentifier, title: string) => {
     setEditingContainer(id);
     setEditingContainerName(title);
     setShowEditContainerModal(true);
+  };
+
+  const openEditItemModal = (id: UniqueIdentifier, title: string) => {
+    setEditingItem(id);
+    setEditingItemName(title);
+    setShowEditItemModal(true);
   };
 
   function findValueOfItems(id: UniqueIdentifier | undefined, type: string) {
@@ -395,6 +431,32 @@ export default function App() {
           />
         </div>
       </Modal>
+      {/* 📂 Edit Item Modal */}
+      <Modal showModal={showEditItemModal} setShowModal={setShowEditItemModal}>
+        <div className="flex flex-col w-full items-start gap-y-4">
+          <h1 className="text-gray-800 text-2xl font-bold text-center mx-auto">
+            Edit Item
+          </h1>
+          <Input
+            type="text"
+            placeholder="Item Title"
+            name="itemname"
+            value={editingItemName}
+            onChange={(event) => setEditingItemName(event.target.value)}
+          />
+          <div className="flex justify-between w-full gap-3">
+            <Button
+              bgLight={true}
+              fullWidth={true}
+              variant="ghost"
+              label="Cancel"
+              onClick={() => setShowEditItemModal(false)}
+            />
+            <Button fullWidth={true} label="Save" onClick={onEditItem} />
+          </div>
+        </div>
+      </Modal>
+      {/* header */}
       <div className="flex items-center justify-between gap-y-2">
         <h1 className="text-gray-800 text-3xl font-bold">DragTrack</h1>
         <Button
@@ -430,7 +492,13 @@ export default function App() {
                   >
                     <div className="flex items-start flex-col gap-y-2">
                       {container.items.map((item) => (
-                        <Items title={item.title} id={item.id} key={item.id} />
+                        <Items
+                          title={item.title}
+                          id={item.id}
+                          key={item.id}
+                          onEdit={() => openEditItemModal(item.id, item.title)}
+                          onDelete={onDeleteItem}
+                        />
                       ))}
                     </div>
                   </SortableContext>
