@@ -8,3 +8,14 @@ export type DNDType = {
     title: string;
   }[];
 };
+
+export type ItemType = {
+  id: UniqueIdentifier;
+  title: string;
+};
+
+export type ContainerType = {
+  id: UniqueIdentifier;
+  title: string;
+  items: ItemType[];
+};
