@@ -40,18 +40,18 @@ export function Items({ id, title, onEdit, onDelete }: ItemsType) {
         transform: CSS.Translate.toString(transform),
       }}
       className={clsx(
-        "bg-white shadow rounded-md w-full border  border-200 hover:border-gray-200 flex pr-2 relative",
+        "bg-white shadow rounded-md w-full border border-200 hover:border-gray-200 flex pr-2 relative items-start",
         isDragging && "opacity-50"
       )}
     >
       <div
-        className="flex flex-1 items-center justify-between p-4 pr-3"
+        className="flex flex-1 items-center justify-between p-4 pr-3 max-w-[400px] break-all"
         {...listeners}
       >
         {title}
       </div>
       <button
-        className="text-gray-600 hover:text-gray-900 transition-colors"
+        className="text-gray-600 hover:text-gray-900 transition-colors mt-5"
         onClick={() => setMenuOpen(!isMenuOpen)}
       >
         <EllipsisVertical size={17} />
