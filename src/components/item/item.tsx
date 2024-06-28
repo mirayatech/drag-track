@@ -49,24 +49,24 @@ export function Items({ id, title, onEdit, onDelete }: ItemsType) {
         {...listeners}
       >
         {title}
+        <button
+          className="text-gray-600 hover:text-gray-900 transition-colors "
+          onClick={() => setMenuOpen(!isMenuOpen)}
+        >
+          <EllipsisVertical size={17} />
+        </button>
+        <AnimatePresence>
+          {isMenuOpen && (
+            <Menu
+              extraTop={true}
+              setMenuOpen={setMenuOpen}
+              isMenuOpen={isMenuOpen}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
+          )}
+        </AnimatePresence>
       </div>
-      <button
-        className="text-gray-600 hover:text-gray-900 transition-colors mt-5"
-        onClick={() => setMenuOpen(!isMenuOpen)}
-      >
-        <EllipsisVertical size={17} />
-      </button>
-      <AnimatePresence>
-        {isMenuOpen && (
-          <Menu
-            extraTop={true}
-            setMenuOpen={setMenuOpen}
-            isMenuOpen={isMenuOpen}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 }
