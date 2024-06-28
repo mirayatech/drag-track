@@ -41,6 +41,7 @@ export function Items({ id, title, onEdit, onDelete }: ItemsType) {
       }}
       className={clsx(
         "bg-white shadow rounded-md w-full border border-200 hover:border-gray-200 flex pr-2 relative items-start",
+        "bg-white shadow rounded-md w-full border border-200 hover:border-gray-200 flex pr-2 relative items-start",
         isDragging && "opacity-50"
       )}
     >
