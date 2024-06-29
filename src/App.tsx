@@ -105,7 +105,7 @@ export default function App() {
       <Modal showModal={showAddItemModal} setShowModal={setShowAddItemModal}>
         <div className="flex flex-col w-full items-start gap-y-4">
           <h1 className="text-gray-800 text-xl md:text-2xl font-bold text-center mx-auto">
-            Add Item
+            Add Card
           </h1>
           <Input
             type="text"
@@ -116,7 +116,7 @@ export default function App() {
           />
           <Button
             fullWidth={true}
-            label="Add Item"
+            label="Add Card"
             onClick={() =>
               onAddItem(
                 itemName,

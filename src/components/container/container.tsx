@@ -85,7 +85,7 @@ export function Container({
         <Button
           variant="ghost"
           onClick={onAddItem}
-          label="Add Item"
+          label="Add Card"
           fullWidth={true}
         />
       </div>
