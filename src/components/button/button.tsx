@@ -11,6 +11,7 @@ type ButtonProps = {
     | "secondary"
     | "ghost"
     | "link";
+  disabled?: boolean;
 };
 
 export function Button({
@@ -20,6 +21,7 @@ export function Button({
   variant = "default",
   bgLight = false,
   danger = false,
+  disabled = false,
 }: ButtonProps) {
   const buttonVariants = {
     default: "bg-slate-900 text-white hover:bg-slate-800",
@@ -36,6 +38,7 @@ export function Button({
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       className={`${
         fullWidth
           ? "w-full flex items-center justify-center text-center"

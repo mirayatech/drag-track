@@ -33,6 +33,12 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import { Layout, Text, Trash2 } from "lucide-react";
+import {
+  isContainerNameEmpty,
+  isItemNameEmpty,
+  isEditingContainerNameChanged,
+  isEditingItemNameChanged,
+} from "./lib/utilities/validation";
 
 export default function App() {
   const [containerName, setContainerName] = useState("");
@@ -87,6 +93,7 @@ export default function App() {
                 addContainer
               )
             }
+            disabled={isContainerNameEmpty(containerName)}
           />
         </div>
       </Modal>
@@ -115,6 +122,7 @@ export default function App() {
                 currentContainerId
               )
             }
+            disabled={isItemNameEmpty(itemName)}
           />
         </div>
       </Modal>
@@ -145,6 +153,13 @@ export default function App() {
                 setEditingContainer,
                 setEditingContainerName,
                 setShowEditContainerModal
+              )
+            }
+            disabled={
+              !isEditingContainerNameChanged(
+                editingContainerName,
+                editingContainer,
+                containers
               )
             }
           />
@@ -195,6 +210,13 @@ export default function App() {
                   setContainers,
                   setEditingItem,
                   setShowEditItemModal
+                )
+              }
+              disabled={
+                !isEditingItemNameChanged(
+                  editingItemName,
+                  editingItem,
+                  containers
                 )
               }
             />
