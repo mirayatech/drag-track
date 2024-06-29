@@ -109,8 +109,8 @@ export default function App() {
           </h1>
           <Input
             type="text"
-            placeholder="Item Title"
-            name="itemname"
+            placeholder="Card Title"
+            name="card-name"
             value={itemName}
             onChange={(event) => setItemName(event.target.value)}
           />
@@ -204,13 +204,13 @@ export default function App() {
           <div className="flex gap-3 mb-3">
             <Text size={18} className="mt-1" />
             <span className="text-base font-semibold md:font-medium">
-              Item Title
+              Card Title
             </span>{" "}
           </div>
           <Input
             type="text"
-            placeholder="Item Title"
-            name="itemname"
+            placeholder="Card Title"
+            name="card-name"
             value={editingItemName}
             onChange={(event) => setEditingItemName(event.target.value)}
           />{" "}
