@@ -16,6 +16,11 @@ import {
   useContainerStore,
   findContainerTitle,
   onDeleteItem,
+  findContainerNameByItemId,
+  isContainerNameEmpty,
+  isItemNameEmpty,
+  isEditingContainerNameChanged,
+  isEditingItemNameChanged,
 } from "./lib";
 
 import {
@@ -33,12 +38,6 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import { Layout, Text, Trash2 } from "lucide-react";
-import {
-  isContainerNameEmpty,
-  isItemNameEmpty,
-  isEditingContainerNameChanged,
-  isEditingItemNameChanged,
-} from "./lib/utilities/validation";
 
 export default function App() {
   const [containerName, setContainerName] = useState("");
@@ -63,6 +62,11 @@ export default function App() {
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
+  );
+
+  const containerNameForEditingItem = findContainerNameByItemId(
+    containers,
+    editingItem
   );
 
   return (
@@ -173,7 +177,9 @@ export default function App() {
               Optimization
             </span>{" "}
             <br />
-            <span className="text-sm text-gray-500"> in list Container</span>
+            <span className="text-sm text-gray-500">
+              in list {containerNameForEditingItem}
+            </span>
           </h1>
         </div>
 
