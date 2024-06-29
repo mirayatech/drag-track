@@ -15,6 +15,7 @@ import {
   openEditModal,
   useContainerStore,
   findContainerTitle,
+  onDeleteItem,
 } from "./lib";
 
 import {
@@ -213,8 +214,15 @@ export default function App() {
             fullWidth={true}
             variant="ghost"
             label="Delete"
-            // TODO: DELETE ITEM
-            onClick={() => {}}
+            onClick={() =>
+              onDeleteItem(
+                editingItem,
+                containers,
+                setContainers,
+                setEditingItem,
+                setShowEditItemModal
+              )
+            }
           />
         </div>
       </Modal>
