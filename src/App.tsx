@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Container, Input, Items, Modal } from "./components";
+
 import {
   findContainerItems,
   findItemTitle,
@@ -170,17 +171,33 @@ export default function App() {
         </div>
       </Modal>
       <Modal showModal={showEditItemModal} setShowModal={setShowEditItemModal}>
-        <div className="flex items-start gap-3">
-          <Layout size={18} className="mt-1" />
-          <h1 className="leading-[1]">
-            <span className="text-base font-semibold md:font-medium">
-              Optimization
-            </span>{" "}
-            <br />
-            <span className="text-sm text-gray-500">
-              in list {containerNameForEditingItem}
-            </span>
-          </h1>
+        <div className="flex justify-between">
+          <div className="flex items-start gap-3">
+            <Layout size={18} className="mt-1" />
+            <h1 className="leading-[1]">
+              <span className="text-base font-semibold md:font-medium">
+                Optimization
+              </span>{" "}
+              <br />
+              <span className="text-sm text-gray-500">
+                in list {containerNameForEditingItem}
+              </span>
+            </h1>
+          </div>
+          <Button
+            bgLight={true}
+            label=""
+            icon={Trash2}
+            onClick={() =>
+              onDeleteItem(
+                editingItem,
+                containers,
+                setContainers,
+                setEditingItem,
+                setShowEditItemModal
+              )
+            }
+          />
         </div>
 
         <div className="mt-8">
@@ -227,31 +244,6 @@ export default function App() {
               }
             />
           </div>
-        </div>
-
-        <div className="mt-8">
-          <div className="flex gap-3 mb-3">
-            <Trash2 size={18} className="mt-1" />
-            <span className="text-base font-semibold md:font-medium">
-              Delete Item{" "}
-            </span>{" "}
-          </div>
-
-          <Button
-            danger={true}
-            fullWidth={true}
-            variant="ghost"
-            label="Delete"
-            onClick={() =>
-              onDeleteItem(
-                editingItem,
-                containers,
-                setContainers,
-                setEditingItem,
-                setShowEditItemModal
-              )
-            }
-          />
         </div>
       </Modal>
       <div className="flex items-center justify-between gap-y-2">

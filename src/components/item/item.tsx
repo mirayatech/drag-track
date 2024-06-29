@@ -43,7 +43,7 @@ export function Items({ id, title, onEdit }: ItemsType) {
         {title}
       </div>
       <button
-        className="text-gray-400 hover:text-gray-900 transition-colors pt-1 cursor-grab"
+        className="text-gray-400 hover:text-indigo-500 transition-colors p-1 cursor-grab"
         {...listeners}
       >
         <Grip size={17} />
