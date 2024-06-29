@@ -58,12 +58,12 @@ export default function Menu({
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className={`absolute right-0 ${
+          className={`absolute right-3 ${
             extraTop ? "mt-16" : "mt-2"
-          } w-48 bg-white border border-gray-300 rounded-md shadow-lg z-10`}
+          } w-48 bg-white border border-slate-300 rounded-md shadow-lg z-10`}
         >
           <button
-            className="block border-b w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50"
+            className="block border-b w-full text-left px-4 py-2 text-slate-700 hover:bg-slate-50 rounded-t-md"
             onClick={() => {
               setMenuOpen(false);
               if (onEdit) onEdit();
@@ -72,7 +72,7 @@ export default function Menu({
             Edit
           </button>
           <button
-            className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-50"
+            className="block w-full text-left px-4 py-2 text-red-600 hover:bg-slate-50 rounded-b-md"
             onClick={() => {
               setMenuOpen(false);
               if (onDelete) onDelete();

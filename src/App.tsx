@@ -9,7 +9,6 @@ import {
   onAddContainer,
   onAddItem,
   onDeleteContainer,
-  onDeleteItem,
   onEditContainer,
   onEditItem,
   openEditItemModal,
@@ -32,6 +31,7 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
+import { Layout, Text, Trash2 } from "lucide-react";
 
 export default function App() {
   const [containerName, setContainerName] = useState("");
@@ -150,18 +150,32 @@ export default function App() {
         </div>
       </Modal>
       <Modal showModal={showEditItemModal} setShowModal={setShowEditItemModal}>
-        <div className="flex flex-col w-full items-start gap-y-4">
-          <h1 className="text-gray-800 text-xl md:text-2xl font-bold text-center mx-auto">
-            Edit Item
+        <div className="flex items-start gap-3">
+          <Layout size={18} className="mt-1" />
+          <h1 className="leading-[1]">
+            <span className="text-base font-semibold md:font-medium">
+              Optimization
+            </span>{" "}
+            <br />
+            <span className="text-sm text-gray-500"> in list Container</span>
           </h1>
+        </div>
+
+        <div className="mt-8">
+          <div className="flex gap-3 mb-3">
+            <Text size={18} className="mt-1" />
+            <span className="text-base font-semibold md:font-medium">
+              Item Title
+            </span>{" "}
+          </div>
           <Input
             type="text"
             placeholder="Item Title"
             name="itemname"
             value={editingItemName}
             onChange={(event) => setEditingItemName(event.target.value)}
-          />
-          <div className="flex justify-between w-full gap-3">
+          />{" "}
+          <div className="flex justify-between w-full gap-3 mt-2">
             <Button
               bgLight={true}
               fullWidth={true}
@@ -184,6 +198,24 @@ export default function App() {
               }
             />
           </div>
+        </div>
+
+        <div className="mt-8">
+          <div className="flex gap-3 mb-3">
+            <Trash2 size={18} className="mt-1" />
+            <span className="text-base font-semibold md:font-medium">
+              Delete Item{" "}
+            </span>{" "}
+          </div>
+
+          <Button
+            danger={true}
+            fullWidth={true}
+            variant="ghost"
+            label="Delete"
+            // TODO: DELETE ITEM
+            onClick={() => {}}
+          />
         </div>
       </Modal>
       <div className="flex items-center justify-between gap-y-2">
@@ -247,15 +279,6 @@ export default function App() {
                               setShowEditItemModal,
                               item.id,
                               item.title
-                            )
-                          }
-                          onDelete={() =>
-                            onDeleteItem(
-                              item.id,
-                              containers,
-                              setContainers,
-                              setEditingItem,
-                              setShowEditItemModal
                             )
                           }
                         />
